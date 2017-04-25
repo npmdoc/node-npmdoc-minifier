@@ -1,0 +1,874 @@
+<div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a
+
+        href="https://github.com/fizker/minifier#readme"
+
+    >minifier (v0.8.1)</a>
+</h1>
+<h4>A simple tool for minifying CSS/JS without a big setup</h4>
+<div class="apidocSectionDiv"><a
+    href="#apidoc.tableOfContents"
+    id="apidoc.tableOfContents"
+><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.minifier">module minifier</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.minifier.generateOutputName">
+            function <span class="apidocSignatureSpan">minifier.</span>generateOutputName
+            <span class="apidocSignatureSpan">(input, options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.minifier.minify">
+            function <span class="apidocSignatureSpan">minifier.</span>minify
+            <span class="apidocSignatureSpan">(input, options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">number <span class="apidocSignatureSpan">minifier.</span>_eventsCount</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">minifier.</span>_events</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">minifier.</span>css</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">minifier.</span>domain</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">minifier.</span>utils</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.minifier.css">module minifier.css</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.minifier.css.parse">
+            function <span class="apidocSignatureSpan">minifier.css.</span>parse
+            <span class="apidocSignatureSpan">(file, absRoot, minifier)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.minifier.minify">module minifier.minify</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.minifier.minify.minify">
+            function <span class="apidocSignatureSpan">minifier.</span>minify
+            <span class="apidocSignatureSpan">(input, options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.minifier.minify.generateOutputName">
+            function <span class="apidocSignatureSpan">minifier.minify.</span>generateOutputName
+            <span class="apidocSignatureSpan">(input, options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">number <span class="apidocSignatureSpan">minifier.minify.</span>_eventsCount</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">minifier.minify.</span>_events</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">minifier.minify.</span>domain</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.minifier.utils">module minifier.utils</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.minifier.utils.generateOutputName">
+            function <span class="apidocSignatureSpan">minifier.utils.</span>generateOutputName
+            <span class="apidocSignatureSpan">(input, options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.minifier.utils.stripUTF8ByteOrder">
+            function <span class="apidocSignatureSpan">minifier.utils.</span>stripUTF8ByteOrder
+            <span class="apidocSignatureSpan">(data)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.minifier" id="apidoc.module.minifier">module minifier</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.minifier.generateOutputName" id="apidoc.element.minifier.generateOutputName">
+        function <span class="apidocSignatureSpan">minifier.</span>generateOutputName
+        <span class="apidocSignatureSpan">(input, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function generateOutputName(input, options) {
+	if(!options) options = {}
+	var extractedInput =
+		{ md5: generate.bind(null, &#x27;md5&#x27;)
+		, sha: generate.bind(null, &#x27;sha256&#x27;)
+		}
+	var dir = path.dirname(input)
+	path.basename(input).replace(/^(.*)\.([^.]+)$/, function(match, file, ext) {
+		extractedInput.ext = ext
+		extractedInput.filename = file
+		return &#x27;&#x27;
+	})
+
+	var output = hogan.compile(options.template || &#x27;{{filename}}.min.{{ext}}&#x27;).render(extractedInput)
+
+	output = path.join(dir, output)
+
+	if(options.regex) return new RegExp(output.replace(/\.([^*])/g, &#x27;\\.$1&#x27;))
+	return output
+
+	function generate(algorithm) {
+		if(options.regex) return &#x27;.*&#x27;
+		if(options.glob) return &#x27;*&#x27;
+		if(!options.content) throw new Error(&#x27;Content is required for producing &#x27; + algorithm)
+		var digester = digest(algorithm)
+		digester.update(options.content, &#x27;utf8&#x27;)
+		return digester.digest(&#x27;hex&#x27;)
+	}
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+The method for building the output name from the template is exposed for
+convenience:
+
+	var minifier = require(&#x27;minifier&#x27;)
+	var file = &#x27;abc.js&#x27;
+	var template = &#x27;{{filename}}.{{md5}}.{{ext}}&#x27;
+	var content = null; // or the content, if md5 or sha1 should be calculated
+	var result = minifier.<span class="apidocCodeKeywordSpan">generateOutputName</span>(file, { template: template, content: content
+ })
+
+If the input-path includes any folders, they will also be added to the output.
+
+If `content` is eschewed, the `md5` and `sha` digests cannot be calculated.
+
+But there is an option for turning them into either `RegExp` or `glob` compatible
+syntax: Simply add `glob: true` or `regex: true` to the options array:
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.minifier.minify" id="apidoc.element.minifier.minify">
+        function <span class="apidocSignatureSpan">minifier.</span>minify
+        <span class="apidocSignatureSpan">(input, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function minify(input, options) {
+	options = fmerge({}, options)
+
+	var output
+	var template
+
+	if(!input || (Array.isArray(input) &#x26;&#x26; input.length == 0)) {
+		obj.emit(&#x27;error&#x27;, new Error(&#x27;The input is required&#x27;))
+	}
+
+	if(options.cleanOnly) {
+		options.clean = true
+	}
+	output = options.output
+	template = options.template
+
+	if(output &#x26;&#x26; template) {
+		return obj.emit(
+			  &#x27;error&#x27;
+			,   new Error(&#x27;It does not make sense to provide both --output and &#x27;
+			  + &#x27;--template options. Please choose one.&#x27;)
+		)
+	}
+
+	if(!Array.isArray(input) &#x26;&#x26; fs.statSync(input).isDirectory()) {
+		if(output) {
+			return obj.emit(&#x27;error&#x27;,
+				new Error(&#x27;You cannot use `output` option against a directory&#x27;))
+		}
+		if(options.clean) {
+			clean(input, template || &#x27;{{filename}}.min.{{ext}}&#x27;)
+		}
+		if(options.cleanOnly) {
+			return
+		}
+
+		var files = glob.sync(path.join(input, &#x27;**/*.js&#x27;))
+			.concat(
+				glob.sync(path.join(input, &#x27;**/*.css&#x27;))
+			)
+		if(options.skip) {
+			files = files.filter(function(file) {
+				return !options.skip.some(function(filter) {
+					return ~file.indexOf(filter)
+				})
+			})
+		}
+		files.every(x =&#x3e; handleInputs([x]))
+
+		return
+	}
+
+	var inputs = Array.isArray(input) ? input : [input]
+
+	if(options.clean) {
+		if(template) {
+			clean(path.dirname(inputs[0]), template)
+		} else if(fs.existsSync(output)) {
+			fs.unlinkSync(output)
+		}
+	}
+
+	if(options.cleanOnly) {
+		return
+	}
+
+	handleInputs(inputs)
+
+	function handleInputs(inputs) {
+		var extensionRegex = /(\.js|css)$/
+
+		var usedExtensions = inputs
+			.map(function(i) { return i.match(extensionRegex) })
+			.filter(function(i) { return i != null })
+			.map(function(i) { return i[1] })
+			.filter(function(ext, idx, arr) { return arr.indexOf(ext) == idx })
+
+		if(usedExtensions.length &#x3e; 1) {
+			obj.emit(&#x27;error&#x27;, new Error(&#x27;Please only use one type of extension per run&#x27;))
+			return false
+		} else if(usedExtensions.length == 0 || usedExtensions[0].match(extensionRegex) == null) {
+			obj.emit(&#x27;error&#x27;, new Error(&#x27;Please reference files with the extension as either .js or .css&#x27;))
+			return false
+		}
+
+		var jsFiles = inputs.filter(x =&#x3e; x.endsWith(&#x27;.js&#x27;))
+		var cssFiles = inputs.filter(x =&#x3e; x.endsWith(&#x27;.css&#x27;))
+		if(jsFiles.length &#x3e; 0) {
+			js(jsFiles)
+		}
+		if(cssFiles.length &#x3e; 0) {
+			css(cssFiles)
+		}
+		return true
+	}
+
+	function js(inputs) {
+		var max = inputs.map(function(input) {
+			return stripUTF8ByteOrder(fs.readFileSync(input, &#x27;utf8&#x27;))
+		}).join(&#x27;;\n&#x27;)
+
+		var comment = firstComment(max)
+		var min = uglify.minify(max, fmerge(options.uglify, { fromString: true })).code
+		var opts = { content: min, template: template }
+		var renderedOutput = output || generateOutput(inputs[0], opts)
+
+		if(comment) {
+			min = comment +&#x27;\n&#x27; + min
+		}
+
+		fs.writeFileSync(renderedOutput, min)
+	}
+
+	function css(inputs) {
+		var inDir = path.dirname(inputs[0])
+		var outDir = path.dirname(output || inputs[0])
+		var root = path.join(inDir, path.relative(inDir, outDir))
+		var min = inputs.map(input =&#x3e; cssParser(input, root, function(max) {
+			var max = stripUTF8ByteOrder(max)
+			var comment = firstComment(max)
+			var min = sqwish.minify(max, false)
+
+			if(comment) {
+				min = comment + &#x27;\n&#x27; + min
+			}
+
+			return min
+		})).join(&#x27;\n&#x27;)
+		var opts = { content: min, template: template }
+		var renderedOutput = output || generateOutput(inputs[0], opts)
+
+		fs.writeFileSync(renderedOutput, min)
+	}
+
+	function clean(dir, template) {
+		template = template.replace(/{{[^}]*}}/g, &#x27;*&#x27;)
+		glob.sync(path.join(dir, &#x27;**&#x27;, template)).forEach(function(file) {
+			fs.unlinkSync(file)
+		})
+	}
+
+	function firstComment(content) {
+		if(options.noComments) return null
+		content = content.trim()
+		if(content[0] == &#x27;/&#x27; &#x26;&#x26; content[1] == &#x27;*&#x27;) {
+			return content.substring(0, content.indexOf(&#x27;*/&#x27;)+2)
+		}
+		if(content[0] == &#x27;/&#x27; &#x26;&#x26; content[1] == &#x27;/&#x27;) {
+			var lines = content.split(/[\r\n]{1,2}/g)
+			content = lines[0]
+			for(var i = 1; i &#x3c; lines.length; i++) {
+				var line = lines[i]
+				if(line[0] == &#x27;/&#x27; &#x26;&#x26; line[1] == &#x27;/&#x27;) {
+					content += &#x27;\n&#x27; + line
+				}
+			}
+			return content
+		}
+		return null
+	}
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+		process.exit(1)
+	})
+	program.uglify = {
+		output: {
+			semicolons:false,
+		},
+	}
+	minifier.<span class="apidocCodeKeywordSpan">minify</span>(input || inputs, program)
+
+	if(program.cleanOnly) {
+		return console.log(&#x27;Minified files cleaned&#x27;)
+	}
+
+	console.log(&#x27;Minification complete&#x27;)
+}
+...</pre></li>
+    </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.minifier.css" id="apidoc.module.minifier.css">module minifier.css</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.minifier.css.parse" id="apidoc.element.minifier.css.parse">
+        function <span class="apidocSignatureSpan">minifier.css.</span>parse
+        <span class="apidocSignatureSpan">(file, absRoot, minifier)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function parse(file, absRoot, minifier) {
+	if(!minifier) minifier = function(content) { return content }
+	var root = path.dirname(file)
+	var absRoot = absRoot || &#x27;&#x27;
+	var relRoot = path.relative(absRoot, root)
+	var content = minifier(utils.stripUTF8ByteOrder(fs.readFileSync(file, &#x27;utf8&#x27;)))
+
+	return content
+		.replace(stringImportMatcher, function(match, url) {
+			return format(&#x27;@import url(%s);&#x27;, url)
+		})
+		.replace(urlMatcher, function(match, url) {
+			url = url.trim()
+			if(!url.match(dataUrl) &#x26;&#x26; !url.match(absoluteUrl)) {
+				url = path.join(relRoot, url).replace(/\\/g, &#x27;/&#x27;)
+			}
+			return format(&#x27;url(%s)&#x27;, url)
+		})
+		.replace(importMatcher, function(match, junk, file) {
+			if(!file.match(absoluteUrl)) {
+				file = path.join(absRoot, file)
+			}
+			var parsedFile = parse(file, absRoot)
+			return parsedFile +&#x27;\n&#x27;
+		})
+		.trim()
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+		.option(&#x27;--no-comments&#x27;, &#x27;Remove license-style comments&#x27;)
+		.usage(&#x27;[--output file] path/to/input [...path/to/other/input]&#x27;)
+
+		.on(&#x27;skip&#x27;, function(path) {
+			skip.push(path)
+		})
+
+		.<span class="apidocCodeKeywordSpan">parse</span>(process.argv)
+
+	var inputs = program.args
+	var input
+	if(inputs.length == 1) {
+		input = inputs[0]
+	}
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.minifier.minify" id="apidoc.module.minifier.minify">module minifier.minify</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.minifier.minify.minify" id="apidoc.element.minifier.minify.minify">
+        function <span class="apidocSignatureSpan">minifier.</span>minify
+        <span class="apidocSignatureSpan">(input, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function minify(input, options) {
+	options = fmerge({}, options)
+
+	var output
+	var template
+
+	if(!input || (Array.isArray(input) &#x26;&#x26; input.length == 0)) {
+		obj.emit(&#x27;error&#x27;, new Error(&#x27;The input is required&#x27;))
+	}
+
+	if(options.cleanOnly) {
+		options.clean = true
+	}
+	output = options.output
+	template = options.template
+
+	if(output &#x26;&#x26; template) {
+		return obj.emit(
+			  &#x27;error&#x27;
+			,   new Error(&#x27;It does not make sense to provide both --output and &#x27;
+			  + &#x27;--template options. Please choose one.&#x27;)
+		)
+	}
+
+	if(!Array.isArray(input) &#x26;&#x26; fs.statSync(input).isDirectory()) {
+		if(output) {
+			return obj.emit(&#x27;error&#x27;,
+				new Error(&#x27;You cannot use `output` option against a directory&#x27;))
+		}
+		if(options.clean) {
+			clean(input, template || &#x27;{{filename}}.min.{{ext}}&#x27;)
+		}
+		if(options.cleanOnly) {
+			return
+		}
+
+		var files = glob.sync(path.join(input, &#x27;**/*.js&#x27;))
+			.concat(
+				glob.sync(path.join(input, &#x27;**/*.css&#x27;))
+			)
+		if(options.skip) {
+			files = files.filter(function(file) {
+				return !options.skip.some(function(filter) {
+					return ~file.indexOf(filter)
+				})
+			})
+		}
+		files.every(x =&#x3e; handleInputs([x]))
+
+		return
+	}
+
+	var inputs = Array.isArray(input) ? input : [input]
+
+	if(options.clean) {
+		if(template) {
+			clean(path.dirname(inputs[0]), template)
+		} else if(fs.existsSync(output)) {
+			fs.unlinkSync(output)
+		}
+	}
+
+	if(options.cleanOnly) {
+		return
+	}
+
+	handleInputs(inputs)
+
+	function handleInputs(inputs) {
+		var extensionRegex = /(\.js|css)$/
+
+		var usedExtensions = inputs
+			.map(function(i) { return i.match(extensionRegex) })
+			.filter(function(i) { return i != null })
+			.map(function(i) { return i[1] })
+			.filter(function(ext, idx, arr) { return arr.indexOf(ext) == idx })
+
+		if(usedExtensions.length &#x3e; 1) {
+			obj.emit(&#x27;error&#x27;, new Error(&#x27;Please only use one type of extension per run&#x27;))
+			return false
+		} else if(usedExtensions.length == 0 || usedExtensions[0].match(extensionRegex) == null) {
+			obj.emit(&#x27;error&#x27;, new Error(&#x27;Please reference files with the extension as either .js or .css&#x27;))
+			return false
+		}
+
+		var jsFiles = inputs.filter(x =&#x3e; x.endsWith(&#x27;.js&#x27;))
+		var cssFiles = inputs.filter(x =&#x3e; x.endsWith(&#x27;.css&#x27;))
+		if(jsFiles.length &#x3e; 0) {
+			js(jsFiles)
+		}
+		if(cssFiles.length &#x3e; 0) {
+			css(cssFiles)
+		}
+		return true
+	}
+
+	function js(inputs) {
+		var max = inputs.map(function(input) {
+			return stripUTF8ByteOrder(fs.readFileSync(input, &#x27;utf8&#x27;))
+		}).join(&#x27;;\n&#x27;)
+
+		var comment = firstComment(max)
+		var min = uglify.minify(max, fmerge(options.uglify, { fromString: true })).code
+		var opts = { content: min, template: template }
+		var renderedOutput = output || generateOutput(inputs[0], opts)
+
+		if(comment) {
+			min = comment +&#x27;\n&#x27; + min
+		}
+
+		fs.writeFileSync(renderedOutput, min)
+	}
+
+	function css(inputs) {
+		var inDir = path.dirname(inputs[0])
+		var outDir = path.dirname(output || inputs[0])
+		var root = path.join(inDir, path.relative(inDir, outDir))
+		var min = inputs.map(input =&#x3e; cssParser(input, root, function(max) {
+			var max = stripUTF8ByteOrder(max)
+			var comment = firstComment(max)
+			var min = sqwish.minify(max, false)
+
+			if(comment) {
+				min = comment + &#x27;\n&#x27; + min
+			}
+
+			return min
+		})).join(&#x27;\n&#x27;)
+		var opts = { content: min, template: template }
+		var renderedOutput = output || generateOutput(inputs[0], opts)
+
+		fs.writeFileSync(renderedOutput, min)
+	}
+
+	function clean(dir, template) {
+		template = template.replace(/{{[^}]*}}/g, &#x27;*&#x27;)
+		glob.sync(path.join(dir, &#x27;**&#x27;, template)).forEach(function(file) {
+			fs.unlinkSync(file)
+		})
+	}
+
+	function firstComment(content) {
+		if(options.noComments) return null
+		content = content.trim()
+		if(content[0] == &#x27;/&#x27; &#x26;&#x26; content[1] == &#x27;*&#x27;) {
+			return content.substring(0, content.indexOf(&#x27;*/&#x27;)+2)
+		}
+		if(content[0] == &#x27;/&#x27; &#x26;&#x26; content[1] == &#x27;/&#x27;) {
+			var lines = content.split(/[\r\n]{1,2}/g)
+			content = lines[0]
+			for(var i = 1; i &#x3c; lines.length; i++) {
+				var line = lines[i]
+				if(line[0] == &#x27;/&#x27; &#x26;&#x26; line[1] == &#x27;/&#x27;) {
+					content += &#x27;\n&#x27; + line
+				}
+			}
+			return content
+		}
+		return null
+	}
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+		process.exit(1)
+	})
+	program.uglify = {
+		output: {
+			semicolons:false,
+		},
+	}
+	minifier.<span class="apidocCodeKeywordSpan">minify</span>(input || inputs, program)
+
+	if(program.cleanOnly) {
+		return console.log(&#x27;Minified files cleaned&#x27;)
+	}
+
+	console.log(&#x27;Minification complete&#x27;)
+}
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.minifier.minify.generateOutputName" id="apidoc.element.minifier.minify.generateOutputName">
+        function <span class="apidocSignatureSpan">minifier.minify.</span>generateOutputName
+        <span class="apidocSignatureSpan">(input, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function generateOutputName(input, options) {
+	if(!options) options = {}
+	var extractedInput =
+		{ md5: generate.bind(null, &#x27;md5&#x27;)
+		, sha: generate.bind(null, &#x27;sha256&#x27;)
+		}
+	var dir = path.dirname(input)
+	path.basename(input).replace(/^(.*)\.([^.]+)$/, function(match, file, ext) {
+		extractedInput.ext = ext
+		extractedInput.filename = file
+		return &#x27;&#x27;
+	})
+
+	var output = hogan.compile(options.template || &#x27;{{filename}}.min.{{ext}}&#x27;).render(extractedInput)
+
+	output = path.join(dir, output)
+
+	if(options.regex) return new RegExp(output.replace(/\.([^*])/g, &#x27;\\.$1&#x27;))
+	return output
+
+	function generate(algorithm) {
+		if(options.regex) return &#x27;.*&#x27;
+		if(options.glob) return &#x27;*&#x27;
+		if(!options.content) throw new Error(&#x27;Content is required for producing &#x27; + algorithm)
+		var digester = digest(algorithm)
+		digester.update(options.content, &#x27;utf8&#x27;)
+		return digester.digest(&#x27;hex&#x27;)
+	}
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+The method for building the output name from the template is exposed for
+convenience:
+
+	var minifier = require(&#x27;minifier&#x27;)
+	var file = &#x27;abc.js&#x27;
+	var template = &#x27;{{filename}}.{{md5}}.{{ext}}&#x27;
+	var content = null; // or the content, if md5 or sha1 should be calculated
+	var result = minifier.<span class="apidocCodeKeywordSpan">generateOutputName</span>(file, { template: template, content: content
+ })
+
+If the input-path includes any folders, they will also be added to the output.
+
+If `content` is eschewed, the `md5` and `sha` digests cannot be calculated.
+
+But there is an option for turning them into either `RegExp` or `glob` compatible
+syntax: Simply add `glob: true` or `regex: true` to the options array:
+...</pre></li>
+    </ul>
+
+
+
+
+
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.minifier.utils" id="apidoc.module.minifier.utils">module minifier.utils</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.minifier.utils.generateOutputName" id="apidoc.element.minifier.utils.generateOutputName">
+        function <span class="apidocSignatureSpan">minifier.utils.</span>generateOutputName
+        <span class="apidocSignatureSpan">(input, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function generateOutputName(input, options) {
+	if(!options) options = {}
+	var extractedInput =
+		{ md5: generate.bind(null, &#x27;md5&#x27;)
+		, sha: generate.bind(null, &#x27;sha256&#x27;)
+		}
+	var dir = path.dirname(input)
+	path.basename(input).replace(/^(.*)\.([^.]+)$/, function(match, file, ext) {
+		extractedInput.ext = ext
+		extractedInput.filename = file
+		return &#x27;&#x27;
+	})
+
+	var output = hogan.compile(options.template || &#x27;{{filename}}.min.{{ext}}&#x27;).render(extractedInput)
+
+	output = path.join(dir, output)
+
+	if(options.regex) return new RegExp(output.replace(/\.([^*])/g, &#x27;\\.$1&#x27;))
+	return output
+
+	function generate(algorithm) {
+		if(options.regex) return &#x27;.*&#x27;
+		if(options.glob) return &#x27;*&#x27;
+		if(!options.content) throw new Error(&#x27;Content is required for producing &#x27; + algorithm)
+		var digester = digest(algorithm)
+		digester.update(options.content, &#x27;utf8&#x27;)
+		return digester.digest(&#x27;hex&#x27;)
+	}
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+The method for building the output name from the template is exposed for
+convenience:
+
+	var minifier = require(&#x27;minifier&#x27;)
+	var file = &#x27;abc.js&#x27;
+	var template = &#x27;{{filename}}.{{md5}}.{{ext}}&#x27;
+	var content = null; // or the content, if md5 or sha1 should be calculated
+	var result = minifier.<span class="apidocCodeKeywordSpan">generateOutputName</span>(file, { template: template, content: content
+ })
+
+If the input-path includes any folders, they will also be added to the output.
+
+If `content` is eschewed, the `md5` and `sha` digests cannot be calculated.
+
+But there is an option for turning them into either `RegExp` or `glob` compatible
+syntax: Simply add `glob: true` or `regex: true` to the options array:
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.minifier.utils.stripUTF8ByteOrder" id="apidoc.element.minifier.utils.stripUTF8ByteOrder">
+        function <span class="apidocSignatureSpan">minifier.utils.</span>stripUTF8ByteOrder
+        <span class="apidocSignatureSpan">(data)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function stripUTF8ByteOrder(data) {
+	var content = data.toString()
+	if(content[0] === &#x27;\uFEFF&#x27;) {
+		content = content.substring(1)
+	}
+	return content
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+var dataUrl = /^data:/
+
+function parse(file, absRoot, minifier) {
+	if(!minifier) minifier = function(content) { return content }
+	var root = path.dirname(file)
+	var absRoot = absRoot || &#x27;&#x27;
+	var relRoot = path.relative(absRoot, root)
+	var content = minifier(utils.<span class="apidocCodeKeywordSpan">stripUTF8ByteOrder</span>(fs.readFileSync(file, &#x27;utf8&#x27
+;)))
+
+	return content
+		.replace(stringImportMatcher, function(match, url) {
+			return format(&#x27;@import url(%s);&#x27;, url)
+		})
+		.replace(urlMatcher, function(match, url) {
+			url = url.trim()
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
